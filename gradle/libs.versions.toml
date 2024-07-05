@@ -19,6 +19,11 @@ ksp = "1.9.0-1.0.13"
 # room
 room = "2.7.0-alpha04"
 
+# retrofit
+retrofit = "2.9.0"
+okhttp = "4.9.0"
+converter-gson = "2.9.0"
+
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,6 +49,11 @@ hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-com
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+# retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
