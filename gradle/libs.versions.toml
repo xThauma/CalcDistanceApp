@@ -1,13 +1,20 @@
 [versions]
-agp = "8.3.0-alpha03"
-kotlin = "1.8.10"
-core-ktx = "1.12.0"
+agp = "8.4.2"
+kotlin = "1.9.0"
+core-ktx = "1.13.1"
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
-lifecycle-runtime-ktx = "2.7.0"
-activity-compose = "1.8.2"
-compose-bom = "2023.03.00"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
+lifecycle-runtime-ktx = "2.8.2"
+activity-compose = "1.9.0"
+compose-bom = "2024.06.00"
+
+# hilt
+hilt = "2.49"
+hiltNavigation = "1.2.0"
+
+# ksp
+ksp = "1.9.0-1.0.13"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -25,7 +32,18 @@ ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 
+# hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+# hilt
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+# ksp
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

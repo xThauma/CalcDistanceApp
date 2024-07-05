@@ -1,4 +1,4 @@
-package com.calcdistanceapp.ui.theme
+package com.calcdistanceapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
