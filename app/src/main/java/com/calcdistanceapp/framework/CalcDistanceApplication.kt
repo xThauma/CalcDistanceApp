@@ -1,4 +1,4 @@
-package com.calcdistanceapp
+package com.calcdistanceapp.framework
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
