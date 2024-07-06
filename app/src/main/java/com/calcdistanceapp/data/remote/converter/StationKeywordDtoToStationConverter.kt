@@ -1,6 +1,6 @@
-package com.calcdistanceapp.data.converter
+package com.calcdistanceapp.data.remote.converter
 
-import com.calcdistanceapp.data.model.StationKeywordDto
+import com.calcdistanceapp.data.remote.model.StationKeywordDto
 import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.StationKeyword
 import javax.inject.Inject
