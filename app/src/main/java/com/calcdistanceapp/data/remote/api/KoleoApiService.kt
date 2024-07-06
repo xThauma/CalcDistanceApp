@@ -1,9 +1,8 @@
 package com.calcdistanceapp.data.remote.api
 
-import com.calcdistanceapp.data.model.StationDto
-import com.calcdistanceapp.data.model.StationKeywordDto
+import com.calcdistanceapp.data.remote.model.StationDto
+import com.calcdistanceapp.data.remote.model.StationKeywordDto
 import retrofit2.http.GET
-import retrofit2.http.Headers
 
 interface KoleoApiService {
     @GET("main/stations")

@@ -1,14 +1,14 @@
 package com.calcdistanceapp.di
 
-import com.calcdistanceapp.data.converter.StationDtoToStationConverter
-import com.calcdistanceapp.data.converter.StationKeywordDtoToStationConverter
-import com.calcdistanceapp.data.model.StationDto
-import com.calcdistanceapp.data.model.StationKeywordDto
-import com.calcdistanceapp.data.repository.KoleoRepositoryImpl
+import com.calcdistanceapp.data.remote.converter.StationDtoToStationConverter
+import com.calcdistanceapp.data.remote.converter.StationKeywordDtoToStationConverter
+import com.calcdistanceapp.data.remote.model.StationDto
+import com.calcdistanceapp.data.remote.model.StationKeywordDto
+import com.calcdistanceapp.data.remote.repository.KoleoRemoteRemoteRepositoryImpl
 import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.model.StationKeyword
-import com.calcdistanceapp.domain.repository.KoleoRepository
+import com.calcdistanceapp.domain.repository.KoleoRemoteRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,5 +25,5 @@ abstract class AppModule {
     abstract fun bindStationKeywordDtoToStationConverter(converter: StationKeywordDtoToStationConverter): Converter<StationKeywordDto, StationKeyword>
 
     @Binds
-    abstract fun bindKoleoRepository(repository: KoleoRepositoryImpl): KoleoRepository
+    abstract fun bindKoleoRemoteRepository(repository: KoleoRemoteRemoteRepositoryImpl): KoleoRemoteRepository
 }

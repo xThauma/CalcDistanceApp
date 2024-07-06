@@ -1,4 +1,4 @@
-package com.calcdistanceapp.data.model
+package com.calcdistanceapp.data.remote.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
