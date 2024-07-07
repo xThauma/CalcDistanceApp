@@ -12,6 +12,10 @@ class StationDtoToStationConverter @Inject constructor() : Converter<StationDto,
             name = from.name,
             latitude = from.latitude,
             longitude = from.longitude,
-            hits = from.hits
+            hits = from.hits,
+            city = from.city,
+            region = from.region,
+            country = from.country,
+            isGroup = from.isGroup
         )
 }

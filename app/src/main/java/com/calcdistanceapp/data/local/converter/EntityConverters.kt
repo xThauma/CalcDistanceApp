@@ -4,5 +4,6 @@ data class EntityConverters(
     val stationEntityToStationConverter: StationEntityToStationConverter,
     val stationKeywordEntityToStationKeywordConverter: StationKeywordEntityToStationKeywordConverter,
     val stationToEntityConverter: StationToStationEntityConverter,
-    val stationKeywordToEntityConverter: StationKeywordToStationEntityConverter
+    val stationKeywordToStationKeywordEntityConverter: StationKeywordToStationKeywordEntityConverter,
+    val stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter
 )
