@@ -32,11 +32,11 @@ class GetStationsUseCase @Inject constructor(
                 if (localStations.isNotEmpty()) {
                     DataResult.Success.FetchLocal(localStations)
                 } else {
-                    DataResult.Error("No internet connection and no local data available")
+                    DataResult.Error.NoInternetError
                 }
             }
         } catch (e: Exception) {
-            DataResult.Error(e.message ?: "Unknown error occurred when fetching stations")
+            DataResult.Error.UnknownError(e)
         }
     }
 
