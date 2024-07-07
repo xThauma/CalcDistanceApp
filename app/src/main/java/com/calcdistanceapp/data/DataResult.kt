@@ -10,7 +10,11 @@ sealed class DataResult<out T : Any> {
         data class FetchRemote<T : Any>(override val data: T) : Success<T>(data)
     }
 
-    data class Error(val msg: String) : DataResult<Nothing>()
+    sealed class Error(val msg: String) : DataResult<Nothing>() {
+        data object NoInternetError : Error("No internet connection and no local data available")
+        data class UnknownError(val exception: Exception) :
+            Error(exception.message ?: "Unknown error occurred when fetching station keywords")
+    }
 
     fun isSuccess(): Boolean {
         return this is Success

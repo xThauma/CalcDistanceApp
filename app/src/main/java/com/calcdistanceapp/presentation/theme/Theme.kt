@@ -1,4 +1,4 @@
-package com.calcdistanceapp.presentation.ui.theme
+package com.calcdistanceapp.presentation.theme
 
 import android.app.Activity
 import android.os.Build

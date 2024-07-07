@@ -32,11 +32,11 @@ class GetStationKeywordsUseCase @Inject constructor(
                 if (localKeywords.isNotEmpty()) {
                     DataResult.Success.FetchLocal(localKeywords)
                 } else {
-                    DataResult.Error("No internet connection and no local data available")
+                    DataResult.Error.NoInternetError
                 }
             }
         } catch (e: Exception) {
-            DataResult.Error(e.message ?: "Unknown error occurred when fetching station keywords")
+            DataResult.Error.UnknownError(e)
         }
     }
 
