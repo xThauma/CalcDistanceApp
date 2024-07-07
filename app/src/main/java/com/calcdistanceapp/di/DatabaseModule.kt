@@ -6,8 +6,9 @@ import com.calcdistanceapp.data.local.converter.EntityConverters
 import com.calcdistanceapp.data.local.converter.SettingsEntityToSettingsConverter
 import com.calcdistanceapp.data.local.converter.StationEntityToStationConverter
 import com.calcdistanceapp.data.local.converter.StationKeywordEntityToStationKeywordConverter
-import com.calcdistanceapp.data.local.converter.StationKeywordToStationEntityConverter
+import com.calcdistanceapp.data.local.converter.StationKeywordToStationKeywordEntityConverter
 import com.calcdistanceapp.data.local.converter.StationToStationEntityConverter
+import com.calcdistanceapp.data.local.converter.StringPolishAccentToStringNoAccentConverter
 import com.calcdistanceapp.data.local.dao.SettingsDao
 import com.calcdistanceapp.data.local.dao.StationDao
 import com.calcdistanceapp.data.local.dao.StationKeywordDao
@@ -45,7 +46,10 @@ abstract class DatabaseModule {
     abstract fun bindStationToStationEntityConverter(converter: StationToStationEntityConverter): Converter<Station, StationEntity>
 
     @Binds
-    abstract fun bindStationKeywordToStationEntityConverter(converter: StationKeywordToStationEntityConverter): Converter<StationKeyword, StationKeywordEntity>
+    abstract fun bindStationKeywordToStationEntityConverter(converter: StationKeywordToStationKeywordEntityConverter): Converter<StationKeyword, StationKeywordEntity>
+
+    @Binds
+    abstract fun bindStringPolishAccentToStringNoAccentConverter(converter: StringPolishAccentToStringNoAccentConverter): Converter<String, String>
 
     @Binds
     abstract fun bindKoleoLocalRepository(repository: KoleoLocalRepositoryImpl): KoleoLocalRepository
@@ -78,13 +82,15 @@ abstract class DatabaseModule {
             stationEntityToStationConverter: StationEntityToStationConverter,
             stationKeywordEntityToStationKeywordConverter: StationKeywordEntityToStationKeywordConverter,
             stationToEntityConverter: StationToStationEntityConverter,
-            stationKeywordToEntityConverter: StationKeywordToStationEntityConverter
+            stationKeywordToEntityConverter: StationKeywordToStationKeywordEntityConverter,
+            stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter
         ): EntityConverters {
             return EntityConverters(
                 stationEntityToStationConverter,
                 stationKeywordEntityToStationKeywordConverter,
                 stationToEntityConverter,
-                stationKeywordToEntityConverter
+                stationKeywordToEntityConverter,
+                stringPolishAccentToStringNoAccentConverter
             )
         }
     }

@@ -5,11 +5,12 @@ import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.StationKeyword
 import javax.inject.Inject
 
-class StationKeywordToStationEntityConverter @Inject constructor() :
-    Converter<StationKeyword, StationKeywordEntity> {
+class StationKeywordToStationKeywordEntityConverter @Inject constructor(
+    private val stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter
+) : Converter<StationKeyword, StationKeywordEntity> {
     override fun convert(from: StationKeyword): StationKeywordEntity =
         StationKeywordEntity(
-            keyword = from.keyword,
+            keyword = stringPolishAccentToStringNoAccentConverter.convert(from.keyword),
             stationId = from.stationId
         )
 }

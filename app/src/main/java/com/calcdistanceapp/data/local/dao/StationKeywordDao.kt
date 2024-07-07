@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.calcdistanceapp.data.local.DatabaseConstants.TABLE_STATION_KEYWORD
 import com.calcdistanceapp.data.local.model.StationKeywordEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StationKeywordDao {
@@ -15,9 +16,9 @@ interface StationKeywordDao {
     @Query("SELECT * FROM $TABLE_STATION_KEYWORD")
     fun getAllStationKeywords(): List<StationKeywordEntity>
 
-    @Query("SELECT * FROM $TABLE_STATION_KEYWORD WHERE stationId = :stationId")
-    fun getStationKeywordsByStationId(stationId: Int): List<StationKeywordEntity>
-
     @Query("DELETE FROM $TABLE_STATION_KEYWORD")
     suspend fun deleteAllStationKeywords()
+
+    @Query("SELECT * FROM $TABLE_STATION_KEYWORD WHERE LOWER(keyword) LIKE '%' || LOWER(:keyword) || '%'")
+    fun searchKeywords(keyword: String): Flow<List<StationKeywordEntity>>
 }

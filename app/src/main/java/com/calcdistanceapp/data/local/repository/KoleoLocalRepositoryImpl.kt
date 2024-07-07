@@ -7,6 +7,10 @@ import com.calcdistanceapp.data.local.dao.StationKeywordDao
 import com.calcdistanceapp.data.local.model.SettingsEntity
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.model.StationKeyword
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class KoleoLocalRepositoryImpl @Inject constructor(
@@ -35,7 +39,7 @@ class KoleoLocalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertStationKeywords(stationKeywords: List<StationKeyword>) {
-        stationKeywordDao.insertAll(stationKeywords.map { entityConverters.stationKeywordToEntityConverter.convert(it) })
+        stationKeywordDao.insertAll(stationKeywords.map { entityConverters.stationKeywordToStationKeywordEntityConverter.convert(it) })
     }
 
     override suspend fun deleteAllStations() {
@@ -52,5 +56,18 @@ class KoleoLocalRepositoryImpl @Inject constructor(
 
     override suspend fun getSettings(): SettingsEntity {
         return settingsDao.getSettings() ?: SettingsEntity()
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    override suspend fun searchStationsByKeyword(keyword: String): Flow<List<Station>> {
+        val keywordNoAccents = entityConverters.stringPolishAccentToStringNoAccentConverter.convert(keyword)
+        return stationKeywordDao.searchKeywords("%$keywordNoAccents%")
+            .flatMapConcat { keywordEntities ->
+                val stationIds = keywordEntities.map { it.stationId }
+                stationDao.getStationsByIds(stationIds)
+            }
+            .map { stationEntities ->
+                stationEntities.map { entityConverters.stationEntityToStationConverter.convert(it) }
+            }
     }
 }
