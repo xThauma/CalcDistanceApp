@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.calcdistanceapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -78,7 +78,10 @@ dependencies {
     // hilt
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
+    testImplementation(libs.hilt.compiler)
+    androidTestImplementation(libs.hilt.testing)
     ksp(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 
     // room
     implementation(libs.room.ktx)
@@ -88,6 +91,7 @@ dependencies {
     // retrofit
     implementation(libs.retrofit)
     implementation(libs.okhttp)
+    androidTestImplementation(libs.okhttp.mockwebserver)
     implementation(libs.converter.gson)
 
     // material

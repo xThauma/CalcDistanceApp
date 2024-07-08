@@ -87,7 +87,7 @@ fun SearchBarComposable(
                                         onExpandedChange(false)
                                     }
                                 },
-                                imageVector = Icons.Default.Clear, contentDescription = null
+                                imageVector = Icons.Default.Clear, contentDescription = "delete text"
                             )
                         }
                     },
