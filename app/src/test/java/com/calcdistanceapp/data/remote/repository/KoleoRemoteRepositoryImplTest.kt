@@ -14,17 +14,17 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class KoleoRemoteRemoteRepositoryImplTest {
+class KoleoRemoteRepositoryImplTest {
 
     private val apiService: KoleoApiService = mock()
     private val stationDtoToStationConverter: StationDtoToStationConverter = mock()
     private val stationKeywordDtoToStationKeywordConverter: StationKeywordDtoToStationConverter = mock()
 
-    private lateinit var classUnderTest: KoleoRemoteRemoteRepositoryImpl
+    private lateinit var classUnderTest: KoleoRemoteRepositoryImpl
 
     @Before
     fun setUp() {
-        classUnderTest = KoleoRemoteRemoteRepositoryImpl(
+        classUnderTest = KoleoRemoteRepositoryImpl(
             apiService = apiService,
             stationDtoToStationConverter = stationDtoToStationConverter,
             stationKeywordDtoToStationKeywordConverter = stationKeywordDtoToStationKeywordConverter

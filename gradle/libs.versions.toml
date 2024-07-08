@@ -53,6 +53,7 @@ coroutine-test-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-corouti
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+hilt-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 
 # room
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -62,6 +63,7 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 # retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
 converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "converter-gson" }
 
 # material3

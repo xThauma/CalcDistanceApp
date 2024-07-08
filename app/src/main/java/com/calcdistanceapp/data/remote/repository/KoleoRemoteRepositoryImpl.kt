@@ -8,7 +8,7 @@ import com.calcdistanceapp.domain.model.StationKeyword
 import com.calcdistanceapp.domain.repository.KoleoRemoteRepository
 import javax.inject.Inject
 
-class KoleoRemoteRemoteRepositoryImpl @Inject constructor(
+class KoleoRemoteRepositoryImpl @Inject constructor(
     private val apiService: KoleoApiService,
     private val stationDtoToStationConverter: StationDtoToStationConverter,
     private val stationKeywordDtoToStationKeywordConverter: StationKeywordDtoToStationConverter
