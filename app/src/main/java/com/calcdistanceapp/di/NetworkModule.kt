@@ -1,6 +1,5 @@
 package com.calcdistanceapp.di
 
-import androidx.annotation.VisibleForTesting
 import com.calcdistanceapp.data.remote.api.KoleoApiService
 import com.calcdistanceapp.data.remote.interceptor.KoleoErrorInterceptor
 import com.calcdistanceapp.data.remote.interceptor.KoleoHeaderInterceptor
@@ -26,8 +25,7 @@ abstract class NetworkModule {
 
     companion object {
 
-        @VisibleForTesting
-        const val BASE_URL = "https://koleo.pl/api/v2/"
+        private const val BASE_URL = "https://koleo.pl/api/v2/"
         private const val TIMEOUT: Long = 5
 
         @Provides
