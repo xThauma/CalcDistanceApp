@@ -1,6 +1,5 @@
 package com.calcdistanceapp.data.remote.interceptor
 
-import com.calcdistanceapp.di.NetworkModule.BASE_URL
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -23,7 +22,7 @@ class KoleoHeaderInterceptorTest {
     fun setUp() {
         interceptor = KoleoHeaderInterceptor()
         chain = mock()
-        originalRequest = Request.Builder().url(BASE_URL).build()
+        originalRequest = Request.Builder().url("http://www.test.com").build()
         modifiedRequest = mock()
         response = mock()
 
