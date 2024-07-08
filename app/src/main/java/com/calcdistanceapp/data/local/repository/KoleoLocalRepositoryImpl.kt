@@ -27,7 +27,11 @@ class KoleoLocalRepositoryImpl @Inject constructor(
 
     override suspend fun getStationKeywords(): List<StationKeyword> {
         val stationKeywords = stationKeywordDao.getAllStationKeywords()
-        return stationKeywords.map { entityConverters.stationKeywordEntityToStationKeywordConverter.convert(it) }
+        return stationKeywords.map {
+            entityConverters.stationKeywordEntityToStationKeywordConverter.convert(
+                it
+            )
+        }
     }
 
     override suspend fun insertCreationDate() {
@@ -39,7 +43,11 @@ class KoleoLocalRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertStationKeywords(stationKeywords: List<StationKeyword>) {
-        stationKeywordDao.insertAll(stationKeywords.map { entityConverters.stationKeywordToStationKeywordEntityConverter.convert(it) })
+        stationKeywordDao.insertAll(stationKeywords.map {
+            entityConverters.stationKeywordToStationKeywordEntityConverter.convert(
+                it
+            )
+        })
     }
 
     override suspend fun deleteAllStations() {
@@ -60,7 +68,8 @@ class KoleoLocalRepositoryImpl @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override suspend fun searchStationsByKeyword(keyword: String): Flow<List<Station>> {
-        val keywordNoAccents = entityConverters.stringPolishAccentToStringNoAccentConverter.convert(keyword)
+        val keywordNoAccents =
+            entityConverters.stringPolishAccentToStringNoAccentConverter.convert(keyword)
         return stationKeywordDao.searchKeywords("%$keywordNoAccents%")
             .flatMapConcat { keywordEntities ->
                 val stationIds = keywordEntities.map { it.stationId }

@@ -5,7 +5,8 @@ import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.StationKeyword
 import javax.inject.Inject
 
-class StationKeywordEntityToStationKeywordConverter @Inject constructor() : Converter<StationKeywordEntity, StationKeyword> {
+class StationKeywordEntityToStationKeywordConverter @Inject constructor() :
+    Converter<StationKeywordEntity, StationKeyword> {
     override fun convert(from: StationKeywordEntity): StationKeyword =
         StationKeyword(
             keyword = from.keyword,

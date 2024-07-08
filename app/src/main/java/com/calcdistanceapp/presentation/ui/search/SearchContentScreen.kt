@@ -12,7 +12,8 @@ fun SearchItemScreenComposable(
     searchResults: List<Station>,
     onClick: (Station) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.fillMaxWidth()
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth()
     ) {
         items(searchResults) { station ->
             SearchItemComposable(station = station, onClick = onClick)

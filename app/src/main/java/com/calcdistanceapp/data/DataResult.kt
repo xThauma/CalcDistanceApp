@@ -1,13 +1,11 @@
 package com.calcdistanceapp.data
 
-import com.calcdistanceapp.data.DataResult.Success.FetchLocal
-
 sealed class DataResult<out T : Any> {
 
-    sealed class Success<T : Any>(open val data: T) : DataResult<T>() {
+    sealed class Success : DataResult<Nothing>() {
 
-        data class FetchLocal<T : Any>(override val data: T) : Success<T>(data)
-        data class FetchRemote<T : Any>(override val data: T) : Success<T>(data)
+        data object FetchLocal : Success()
+        data object FetchRemote : Success()
     }
 
     sealed class Error(val msg: String) : DataResult<Nothing>() {
@@ -20,8 +18,8 @@ sealed class DataResult<out T : Any> {
         return this is Success
     }
 
-    fun isFetchLocal(): Boolean {
-        return this is FetchLocal
+    fun isFetchRemote(): Boolean {
+        return this is Success.FetchRemote
     }
 
     fun isError(): Boolean {

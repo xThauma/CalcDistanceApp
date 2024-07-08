@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private const val BASE_URL = "https://koleo.pl/api/v2/"
-    private const val TIMEOUT = 5
+    private const val TIMEOUT: Long = 5
 
     @Provides
     fun provideOkHttpClient(
@@ -26,9 +26,9 @@ object NetworkModule {
         koleoErrorInterceptor: KoleoErrorInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(koleoHeaderInterceptor)
             .addInterceptor(koleoRetryInterceptor)
             .addInterceptor(koleoErrorInterceptor)

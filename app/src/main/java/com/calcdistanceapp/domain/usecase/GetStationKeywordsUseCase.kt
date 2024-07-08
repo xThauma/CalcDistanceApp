@@ -20,7 +20,7 @@ class GetStationKeywordsUseCase @Inject constructor(
                 if (settings.creationDate.isWithinLast24Hours()) {
                     val localKeywords = koleoLocalRepository.getStationKeywords()
                     if (localKeywords.isNotEmpty()) {
-                        DataResult.Success.FetchLocal(localKeywords)
+                        DataResult.Success.FetchLocal
                     } else {
                         fetchRemoteStationKeywords()
                     }
@@ -30,7 +30,7 @@ class GetStationKeywordsUseCase @Inject constructor(
             } else {
                 val localKeywords = koleoLocalRepository.getStationKeywords()
                 if (localKeywords.isNotEmpty()) {
-                    DataResult.Success.FetchLocal(localKeywords)
+                    DataResult.Success.FetchLocal
                 } else {
                     DataResult.Error.NoInternetError
                 }
@@ -44,6 +44,6 @@ class GetStationKeywordsUseCase @Inject constructor(
         koleoLocalRepository.deleteAllStationKeywords()
         val remoteKeywords = koleoRemoteRepository.getStationKeywords()
         koleoLocalRepository.insertStationKeywords(remoteKeywords)
-        return DataResult.Success.FetchRemote(remoteKeywords)
+        return DataResult.Success.FetchRemote
     }
 }

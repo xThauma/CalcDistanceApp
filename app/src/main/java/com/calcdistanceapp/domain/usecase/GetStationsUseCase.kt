@@ -20,7 +20,7 @@ class GetStationsUseCase @Inject constructor(
                 if (settings.creationDate.isWithinLast24Hours()) {
                     val localStations = koleoLocalRepository.getStations()
                     if (localStations.isNotEmpty()) {
-                        DataResult.Success.FetchLocal(localStations)
+                        DataResult.Success.FetchLocal
                     } else {
                         fetchRemoteStations()
                     }
@@ -30,7 +30,7 @@ class GetStationsUseCase @Inject constructor(
             } else {
                 val localStations = koleoLocalRepository.getStations()
                 if (localStations.isNotEmpty()) {
-                    DataResult.Success.FetchLocal(localStations)
+                    DataResult.Success.FetchLocal
                 } else {
                     DataResult.Error.NoInternetError
                 }
@@ -44,6 +44,6 @@ class GetStationsUseCase @Inject constructor(
         koleoLocalRepository.deleteAllStations()
         val remoteStations = koleoRemoteRepository.getStations()
         koleoLocalRepository.insertStations(remoteStations)
-        return DataResult.Success.FetchRemote(remoteStations)
+        return DataResult.Success.FetchRemote
     }
 }

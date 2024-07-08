@@ -1,8 +1,8 @@
 package com.calcdistanceapp.data.remote.repository
 
+import com.calcdistanceapp.data.remote.api.KoleoApiService
 import com.calcdistanceapp.data.remote.converter.StationDtoToStationConverter
 import com.calcdistanceapp.data.remote.converter.StationKeywordDtoToStationConverter
-import com.calcdistanceapp.data.remote.api.KoleoApiService
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.model.StationKeyword
 import com.calcdistanceapp.domain.repository.KoleoRemoteRepository
