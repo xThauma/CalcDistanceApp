@@ -32,13 +32,13 @@ class KoleoViewModel @Inject constructor(
     private val searchStationsByKeywordUseCase: SearchStationsByKeywordUseCase
 ) : ViewModel() {
 
-    private val _DataState = MutableStateFlow(DataState())
-    val dataState: StateFlow<DataState> = _DataState
+    private val _dataState = MutableStateFlow(DataState())
+    val dataState: StateFlow<DataState> = _dataState
 
     val resultText: String
         get() {
-            val start = _DataState.value.startingStation
-            val end = _DataState.value.endingStation
+            val start = _dataState.value.startingStation
+            val end = _dataState.value.endingStation
 
             if (start == null || end == null) {
                 return ""
@@ -66,7 +66,7 @@ class KoleoViewModel @Inject constructor(
 
     private fun fetchStationsAndKeywords() {
         viewModelScope.launch(Dispatchers.IO) {
-            _DataState.update {
+            _dataState.update {
                 it.copy(
                     isLoading = true,
                     error = ""
@@ -79,22 +79,22 @@ class KoleoViewModel @Inject constructor(
 
                 val stationsDataResult = stationsResult.await()
                 val keywordsDataResult = keywordsResult.await()
-                _DataState.update {
+                _dataState.update {
                     it.copy(isLoading = false)
                 }
 
-                if (stationsDataResult.isFetchLocal() or keywordsDataResult.isFetchLocal()) {
+                if (stationsDataResult.isFetchRemote() or keywordsDataResult.isFetchRemote()) {
                     insertCreationDateUseCase.invoke()
                 }
 
                 if (stationsDataResult.isError() || keywordsDataResult.isError()) {
-                    _DataState.update {
+                    _dataState.update {
                         it.copy(error = (stationsDataResult as DataResult.Error).msg)
                     }
                 }
                 searchStationsByKeyword("")
             } catch (e: Exception) {
-                _DataState.update {
+                _dataState.update {
                     it.copy(error = "Error fetching data, please try again later")
                 }
             }
@@ -105,13 +105,13 @@ class KoleoViewModel @Inject constructor(
         viewModelScope.launch {
             searchStationsByKeywordUseCase(keyword)
                 .collect { searchResults ->
-                    _DataState.update { it.copy(searchResults = searchResults) }
+                    _dataState.update { it.copy(searchResults = searchResults) }
                 }
         }
     }
 
     private fun updateStartingStation(station: Station) {
-        _DataState.update {
+        _dataState.update {
             it.copy(
                 startingStation = station
             )
@@ -119,7 +119,7 @@ class KoleoViewModel @Inject constructor(
     }
 
     private fun updateEndingStation(station: Station) {
-        _DataState.update {
+        _dataState.update {
             it.copy(
                 endingStation = station
             )

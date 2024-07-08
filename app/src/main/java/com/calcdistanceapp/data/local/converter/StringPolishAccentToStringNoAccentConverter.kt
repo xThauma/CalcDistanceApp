@@ -3,7 +3,8 @@ package com.calcdistanceapp.data.local.converter
 import com.calcdistanceapp.domain.converter.Converter
 import javax.inject.Inject
 
-class StringPolishAccentToStringNoAccentConverter @Inject constructor(): Converter<String, String> {
+class StringPolishAccentToStringNoAccentConverter @Inject constructor() :
+    Converter<String, String> {
     override fun convert(from: String): String = from.removeDiacriticsAndLowercase()
 
     private fun String.removeDiacriticsAndLowercase(): String {

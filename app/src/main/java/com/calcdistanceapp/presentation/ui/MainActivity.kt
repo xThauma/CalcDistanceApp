@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
                                 SearchScreenComposable(
                                     resultText = koleoViewModel.resultText,
                                     dataState = dataState,
-                                    onEvent = { event -> koleoViewModel.onEvent(event = event)}
+                                    onEvent = { event -> koleoViewModel.onEvent(event = event) }
                                 )
                             }
                         }
