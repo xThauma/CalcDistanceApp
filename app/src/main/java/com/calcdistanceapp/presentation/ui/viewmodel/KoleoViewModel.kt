@@ -1,9 +1,11 @@
 package com.calcdistanceapp.presentation.ui.viewmodel
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.calcdistanceapp.data.DataResult
 import com.calcdistanceapp.data.event.KoleoEvent
+import com.calcdistanceapp.di.IoDispatcher
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.usecase.GetStationKeywordsUseCase
 import com.calcdistanceapp.domain.usecase.GetStationsUseCase
@@ -11,7 +13,7 @@ import com.calcdistanceapp.domain.usecase.InsertCreationDateUseCase
 import com.calcdistanceapp.domain.usecase.SearchStationsByKeywordUseCase
 import com.calcdistanceapp.presentation.ui.viewmodel.state.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +31,8 @@ class KoleoViewModel @Inject constructor(
     private val getStationsUseCase: GetStationsUseCase,
     private val getStationKeywordsUseCase: GetStationKeywordsUseCase,
     private val insertCreationDateUseCase: InsertCreationDateUseCase,
-    private val searchStationsByKeywordUseCase: SearchStationsByKeywordUseCase
+    private val searchStationsByKeywordUseCase: SearchStationsByKeywordUseCase,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
     private val _dataState = MutableStateFlow(DataState())
@@ -65,7 +68,7 @@ class KoleoViewModel @Inject constructor(
     }
 
     private fun fetchStationsAndKeywords() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(ioDispatcher) {
             _dataState.update {
                 it.copy(
                     isLoading = true,
@@ -102,7 +105,7 @@ class KoleoViewModel @Inject constructor(
     }
 
     private fun searchStationsByKeyword(keyword: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(ioDispatcher) {
             searchStationsByKeywordUseCase(keyword)
                 .collect { searchResults ->
                     _dataState.update { it.copy(searchResults = searchResults) }
@@ -126,7 +129,8 @@ class KoleoViewModel @Inject constructor(
         }
     }
 
-    private fun calculateDistanceBetweenStations(station1: Station, station2: Station): Int {
+    @VisibleForTesting
+    fun calculateDistanceBetweenStations(station1: Station, station2: Station): Int {
         val lat1 = Math.toRadians(station1.latitude)
         val lon1 = Math.toRadians(station1.longitude)
         val lat2 = Math.toRadians(station2.latitude)

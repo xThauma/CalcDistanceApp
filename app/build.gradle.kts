@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     testImplementation(libs.junit)
+    testImplementation(libs.test.core)
+    testImplementation(libs.coroutine.test.core)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
@@ -91,4 +93,8 @@ dependencies {
     // material
     implementation(libs.material3)
     implementation(libs.materialExtension)
+
+    // mockito
+    testImplementation(libs.mockito)
+    testImplementation(libs.mockito.inline)
 }
