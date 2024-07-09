@@ -15,7 +15,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.calcdistanceapp.data.event.KoleoEvent
 import com.calcdistanceapp.presentation.ui.ResultScreenComposable
@@ -40,7 +39,7 @@ fun SearchScreenComposable(
             Text(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
                 text = "Choose 2 stations to calculate distance between them",
-                style = MaterialTheme.typography.titleMedium.copy(color = Color.White)
+                style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.onPrimary)
             )
             SearchBarComposable(
                 hintText = "Starting station",
