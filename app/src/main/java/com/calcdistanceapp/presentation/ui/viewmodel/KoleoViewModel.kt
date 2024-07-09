@@ -112,7 +112,7 @@ class KoleoViewModel @Inject constructor(
     private fun searchStationsByKeyword(keyword: String) {
         viewModelScope.launch(ioDispatcher) {
             searchStationsByKeywordUseCase(keyword)
-                .debounce(300)
+                .debounce(100)
                 .collect { searchResults ->
                     _dataState.update { it.copy(searchResults = searchResults) }
                 }
