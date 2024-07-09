@@ -144,6 +144,6 @@ class KoleoViewModel @Inject constructor(
 
         val radiusOfEarth = 6371.0
         val distanceInKm = radiusOfEarth * c
-        return (distanceInKm * 0.621371).toInt()
+        return distanceInKm.toInt()
     }
 }
