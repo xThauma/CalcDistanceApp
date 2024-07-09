@@ -6,6 +6,7 @@ sealed class DataResult<out T : Any> {
 
         data object FetchLocal : Success()
         data object FetchRemote : Success()
+        data object FetchJson : Success()
     }
 
     sealed class Error(val msg: String) : DataResult<Nothing>() {

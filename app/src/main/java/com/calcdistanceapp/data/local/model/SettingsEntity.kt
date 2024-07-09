@@ -9,5 +9,5 @@ import java.time.LocalDate
 data class SettingsEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val creationDate: LocalDate = LocalDate.now(),
+    val creationDate: LocalDate = LocalDate.of(1990, 1,1),
 )

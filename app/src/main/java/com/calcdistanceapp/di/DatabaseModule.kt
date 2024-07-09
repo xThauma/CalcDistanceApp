@@ -17,6 +17,8 @@ import com.calcdistanceapp.data.local.model.StationEntity
 import com.calcdistanceapp.data.local.model.StationKeywordEntity
 import com.calcdistanceapp.data.local.repository.KoleoLocalRepository
 import com.calcdistanceapp.data.local.repository.KoleoLocalRepositoryImpl
+import com.calcdistanceapp.data.remote.converter.StationDtoToStationConverter
+import com.calcdistanceapp.data.remote.converter.StationKeywordDtoToStationConverter
 import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.Settings
 import com.calcdistanceapp.domain.model.Station
@@ -83,14 +85,18 @@ abstract class DatabaseModule {
             stationKeywordEntityToStationKeywordConverter: StationKeywordEntityToStationKeywordConverter,
             stationToEntityConverter: StationToStationEntityConverter,
             stationKeywordToEntityConverter: StationKeywordToStationKeywordEntityConverter,
-            stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter
+            stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter,
+            stationDtoToStationConverter: StationDtoToStationConverter,
+            stationKeywordDtoToStationConverter: StationKeywordDtoToStationConverter
         ): EntityConverters {
             return EntityConverters(
                 stationEntityToStationConverter,
                 stationKeywordEntityToStationKeywordConverter,
                 stationToEntityConverter,
                 stationKeywordToEntityConverter,
-                stringPolishAccentToStringNoAccentConverter
+                stringPolishAccentToStringNoAccentConverter,
+                stationDtoToStationConverter,
+                stationKeywordDtoToStationConverter
             )
         }
     }
