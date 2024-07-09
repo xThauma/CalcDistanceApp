@@ -63,12 +63,12 @@ class GetStationsUseCaseTest {
         }
 
     @Test
-    fun `invoke should fetch remote stations when network unavailable and local data empty`() =
+    fun `invoke should fetch json stations when network unavailable and local data empty`() =
         runBlocking {
             whenever(connectivityChecker.isNetworkAvailable()).thenReturn(false)
             whenever(localRepository.getStations()).thenReturn(emptyList())
             val result = classUnderTest.invoke()
-            assert(result is DataResult.Error.NoInternetError)
+            assert(result is DataResult.Success.FetchJson)
         }
 
     @Test

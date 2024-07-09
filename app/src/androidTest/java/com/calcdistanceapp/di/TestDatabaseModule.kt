@@ -18,10 +18,13 @@ import com.calcdistanceapp.data.local.model.StationEntity
 import com.calcdistanceapp.data.local.model.StationKeywordEntity
 import com.calcdistanceapp.data.local.repository.KoleoLocalRepository
 import com.calcdistanceapp.data.local.repository.KoleoLocalRepositoryImpl
+import com.calcdistanceapp.data.remote.converter.StationDtoToStationConverter
+import com.calcdistanceapp.data.remote.converter.StationKeywordDtoToStationConverter
 import com.calcdistanceapp.domain.converter.Converter
 import com.calcdistanceapp.domain.model.Settings
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.model.StationKeyword
+import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -87,15 +90,24 @@ abstract class TestDatabaseModule {
             stationKeywordEntityToStationKeywordConverter: StationKeywordEntityToStationKeywordConverter,
             stationToEntityConverter: StationToStationEntityConverter,
             stationKeywordToEntityConverter: StationKeywordToStationKeywordEntityConverter,
-            stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter
+            stringPolishAccentToStringNoAccentConverter: StringPolishAccentToStringNoAccentConverter,
+            stationDtoToStationConverter: StationDtoToStationConverter,
+            stationKeywordDtoToStationConverter: StationKeywordDtoToStationConverter
         ): EntityConverters {
             return EntityConverters(
                 stationEntityToStationConverter,
                 stationKeywordEntityToStationKeywordConverter,
                 stationToEntityConverter,
                 stationKeywordToEntityConverter,
-                stringPolishAccentToStringNoAccentConverter
+                stringPolishAccentToStringNoAccentConverter,
+                stationDtoToStationConverter,
+                stationKeywordDtoToStationConverter
             )
+        }
+
+        @Provides
+        fun provideGson(): Gson {
+            return Gson()
         }
     }
 }

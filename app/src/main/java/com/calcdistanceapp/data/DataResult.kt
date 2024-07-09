@@ -9,10 +9,8 @@ sealed class DataResult<out T : Any> {
         data object FetchJson : Success()
     }
 
-    sealed class Error(val msg: String) : DataResult<Nothing>() {
-        data object NoInternetError : Error("No internet connection and no local data available")
-        data class UnknownError(val exception: Exception) :
-            Error(exception.message ?: "Unknown error occurred when fetching station keywords")
+    sealed class Error : DataResult<Nothing>() {
+        data class UnknownError(val exception: Exception) : Error()
     }
 
     fun isSuccess(): Boolean {

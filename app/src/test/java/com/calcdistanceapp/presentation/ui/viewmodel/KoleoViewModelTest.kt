@@ -73,7 +73,7 @@ class KoleoViewModelTest {
 
     @Test
     fun `fetchStationsAndKeywords should handle error state`() = runTest {
-        whenever(getStationsUseCase.invoke()).thenReturn(DataResult.Error.NoInternetError)
+        whenever(getStationsUseCase.invoke()).thenReturn(DataResult.Error.UnknownError(Exception("error")))
         whenever(getStationKeywordsUseCase.invoke()).thenReturn(DataResult.Success.FetchLocal)
         whenever(searchStationsByKeywordUseCase.invoke(any())).thenReturn(mock())
 
