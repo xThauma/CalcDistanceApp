@@ -14,9 +14,11 @@ import com.calcdistanceapp.domain.usecase.SearchStationsByKeywordUseCase
 import com.calcdistanceapp.presentation.ui.viewmodel.state.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -104,9 +106,11 @@ class KoleoViewModel @Inject constructor(
         }
     }
 
+    @OptIn(FlowPreview::class)
     private fun searchStationsByKeyword(keyword: String) {
         viewModelScope.launch(ioDispatcher) {
             searchStationsByKeywordUseCase(keyword)
+                .debounce(300)
                 .collect { searchResults ->
                     _dataState.update { it.copy(searchResults = searchResults) }
                 }
