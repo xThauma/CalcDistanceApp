@@ -6,6 +6,7 @@ import com.calcdistanceapp.data.remote.interceptor.KoleoHeaderInterceptor
 import com.calcdistanceapp.data.remote.interceptor.KoleoRetryInterceptor
 import com.calcdistanceapp.data.remote.repository.KoleoRemoteRepositoryImpl
 import com.calcdistanceapp.domain.repository.KoleoRemoteRepository
+import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -51,6 +52,11 @@ abstract class NetworkModule {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+        }
+
+        @Provides
+        fun provideGson(): Gson {
+            return Gson()
         }
 
         @Provides
