@@ -96,7 +96,7 @@ class KoleoViewModel @Inject constructor(
 
                 if (stationsDataResult.isError() || keywordsDataResult.isError()) {
                     _dataState.update {
-                        it.copy(error = (stationsDataResult as DataResult.Error).msg)
+                        it.copy(error = (stationsDataResult as DataResult.Error.UnknownError).exception.message ?: "Unknown error occurred when fetching station keywords")
                     }
                 }
                 searchStationsByKeyword("")

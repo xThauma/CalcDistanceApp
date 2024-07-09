@@ -43,8 +43,20 @@ class MockKoleoRemoteRepositoryImpl @Inject constructor(): KoleoRemoteRepository
             isGroup = false
         )
 
+        val station4 = Station(
+            id = 4,
+            name = "Warszawa",
+            latitude = 0.0,
+            longitude = 2.355327,
+            hits = 1800,
+            city = "Paris",
+            region = "Ile-de-France",
+            country = "France",
+            isGroup = false
+        )
 
-        return listOf(station1, station2, station3)
+
+        return listOf(station1, station2, station3, station4)
     }
 
     override suspend fun getStationKeywords(): List<StationKeyword> {
@@ -63,6 +75,11 @@ class MockKoleoRemoteRepositoryImpl @Inject constructor(): KoleoRemoteRepository
             stationId = 3
         )
 
-        return listOf(keyword1, keyword2, keyword3)
+        val keyword4 = StationKeyword(
+            keyword = "Warszawa",
+            stationId = 4
+        )
+
+        return listOf(keyword1, keyword2, keyword3, keyword4)
     }
 }

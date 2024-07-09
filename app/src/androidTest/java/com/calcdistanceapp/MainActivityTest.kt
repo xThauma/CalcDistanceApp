@@ -52,12 +52,15 @@ class MainActivityTest {
         rule.onNodeWithText("King's Cross").assertIsDisplayed()
 
         // check distance
-        rule.onNodeWithText("Total distance: 3460 km").assertIsDisplayed()
+        rule.onNodeWithText("Total distance: 5569 km").assertIsDisplayed()
 
         // check for 2 same stations
         rule.onNodeWithText("King's Cross").performClick()
         rule.onNodeWithContentDescription("delete text").assertIsDisplayed()
         rule.onNodeWithContentDescription("delete text").performClick()
+        rule.onNodeWithText("Ending station").assertIsDisplayed()
+        // debounce fix
+        Thread.sleep(101)
         val kingsCrosses = rule.onAllNodesWithText("Central Station")
         kingsCrosses.assertCountEquals(2)
         kingsCrosses[0].assertIsDisplayed()
@@ -65,5 +68,15 @@ class MainActivityTest {
         kingsCrosses[1].performClick()
 
         rule.onNodeWithText("You can't calculate distance between 2 same stations").assertIsDisplayed()
+
+        kingsCrosses[1].performClick()
+        rule.onNodeWithContentDescription("delete text").assertIsDisplayed()
+        rule.onNodeWithContentDescription("delete text").performClick()
+        // debounce fix
+        Thread.sleep(101)
+        rule.onNodeWithText("Warszawa").assertIsDisplayed()
+        rule.onNodeWithText("Warszawa").performClick()
+
+        rule.onNodeWithText("Cannot calculate distance due to invalid coordinates of one of the stations").assertIsDisplayed()
     }
 }
