@@ -19,10 +19,6 @@ fun TopBarComposable() {
                     text = "Calculate distance",
                     style = MaterialTheme.typography.titleLarge.copy(color = Color.White)
                 )
-                Text(
-                    text = "Choose 2 stations to calculate distance between them",
-                    style = MaterialTheme.typography.titleMedium.copy(color = Color.White)
-                )
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
