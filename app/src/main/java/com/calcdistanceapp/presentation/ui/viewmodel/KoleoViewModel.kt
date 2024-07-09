@@ -51,6 +51,8 @@ class KoleoViewModel @Inject constructor(
 
             return if (start.id == end.id) {
                 "You can't calculate distance between 2 same stations"
+            } else if (start.latitude == 0.0 || start.longitude == 0.0 || end.latitude == 0.0 || end.longitude == 0.0) {
+                return "Cannot calculate distance due to invalid coordinates of one of the stations"
             } else {
                 "Total distance: ${calculateDistanceBetweenStations(start, end)} km"
             }
