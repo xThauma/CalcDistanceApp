@@ -19,6 +19,6 @@ interface StationKeywordDao {
     @Query("DELETE FROM $TABLE_STATION_KEYWORD")
     suspend fun deleteAllStationKeywords()
 
-    @Query("SELECT * FROM $TABLE_STATION_KEYWORD WHERE LOWER(keyword) LIKE '%' || LOWER(:keyword) || '%'")
+    @Query("SELECT * FROM $TABLE_STATION_KEYWORD WHERE LOWER(keyword) LIKE ('%' || LOWER(:keyword) || '%') LIMIT 50")
     fun searchKeywords(keyword: String): Flow<List<StationKeywordEntity>>
 }
