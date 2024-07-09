@@ -91,10 +91,10 @@ class KoleoViewModelTest {
 
     @Test
     fun `calculateDistanceBetweenStations should return correct distance`() {
-        val station1 = Station(1, "Station1", 52.2297, 21.0122, 0, "", "", "", false)
-        val station2 = Station(2, "Station2", 48.8566, 2.3522, 0, "", "", "", false)
+        val station1 = Station(1, "Białystok", 53.12667092, 23.12500186, 0, "", "", "", false)
+        val station2 = Station(2, "Warszawa centralna", 52.22944444, 21.00638888, 0, "", "", "", false)
 
-        val expectedDistance = 849
+        val expectedDistance = 174
 
         classUnderTest = KoleoViewModel(
             getStationsUseCase = getStationsUseCase,
