@@ -55,11 +55,11 @@ class GetStationKeywordsUseCaseTest {
     }
 
     @Test
-    fun `invoke should fetch remote keywords when network unavailable and local data empty`() = runBlocking {
+    fun `invoke should fetch json keywords when network unavailable and local data empty`() = runBlocking {
         whenever(connectivityChecker.isNetworkAvailable()).thenReturn(false)
         whenever(localRepository.getStationKeywords()).thenReturn(emptyList())
         val result = classUnderTest.invoke()
-        assert(result is DataResult.Error.NoInternetError)
+        assert(result is DataResult.Success.FetchJson)
     }
 
     @Test

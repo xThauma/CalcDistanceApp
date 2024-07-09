@@ -14,9 +14,11 @@ import com.calcdistanceapp.domain.usecase.SearchStationsByKeywordUseCase
 import com.calcdistanceapp.presentation.ui.viewmodel.state.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -49,6 +51,8 @@ class KoleoViewModel @Inject constructor(
 
             return if (start.id == end.id) {
                 "You can't calculate distance between 2 same stations"
+            } else if (start.latitude == 0.0 || start.longitude == 0.0 || end.latitude == 0.0 || end.longitude == 0.0) {
+                return "Cannot calculate distance due to invalid coordinates of one of the stations"
             } else {
                 "Total distance: ${calculateDistanceBetweenStations(start, end)} km"
             }
@@ -92,7 +96,7 @@ class KoleoViewModel @Inject constructor(
 
                 if (stationsDataResult.isError() || keywordsDataResult.isError()) {
                     _dataState.update {
-                        it.copy(error = (stationsDataResult as DataResult.Error).msg)
+                        it.copy(error = (stationsDataResult as DataResult.Error.UnknownError).exception.message ?: "Unknown error occurred when fetching station keywords")
                     }
                 }
                 searchStationsByKeyword("")
@@ -104,9 +108,11 @@ class KoleoViewModel @Inject constructor(
         }
     }
 
+    @OptIn(FlowPreview::class)
     private fun searchStationsByKeyword(keyword: String) {
         viewModelScope.launch(ioDispatcher) {
             searchStationsByKeywordUseCase(keyword)
+                .debounce(100)
                 .collect { searchResults ->
                     _dataState.update { it.copy(searchResults = searchResults) }
                 }
@@ -144,6 +150,6 @@ class KoleoViewModel @Inject constructor(
 
         val radiusOfEarth = 6371.0
         val distanceInKm = radiusOfEarth * c
-        return (distanceInKm * 0.621371).toInt()
+        return distanceInKm.toInt()
     }
 }

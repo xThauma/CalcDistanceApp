@@ -1,5 +1,6 @@
 package com.calcdistanceapp.presentation.ui
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,6 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -23,11 +27,27 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CalcDistanceAppTheme {
+            var isDarkTheme by remember {
+                mutableStateOf(when (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES -> { true }
+                    Configuration.UI_MODE_NIGHT_NO -> { false }
+                    else -> { false }
+                })
+            }
+            CalcDistanceAppTheme(
+                darkTheme = isDarkTheme
+            ) {
                 val koleoViewModel: KoleoViewModel = hiltViewModel()
+
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    topBar = { TopBarComposable() }
+                    topBar = {
+                        TopBarComposable(
+                            isDarkTheme = isDarkTheme,
+                            onToggleTheme = { isDarkTheme = !isDarkTheme }
+                        )
+                    }
                 ) { paddingValues ->
                     val dataState by koleoViewModel.dataState.collectAsStateWithLifecycle()
 

@@ -1,5 +1,6 @@
 package com.calcdistanceapp.data.local.repository
 
+import android.content.Context
 import com.calcdistanceapp.data.local.converter.EntityConverters
 import com.calcdistanceapp.data.local.dao.SettingsDao
 import com.calcdistanceapp.data.local.dao.StationDao
@@ -9,6 +10,7 @@ import com.calcdistanceapp.data.local.model.StationEntity
 import com.calcdistanceapp.data.local.model.StationKeywordEntity
 import com.calcdistanceapp.domain.model.Station
 import com.calcdistanceapp.domain.model.StationKeyword
+import com.google.gson.Gson
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -24,22 +26,28 @@ class KoleoLocalRepositoryImplTest {
     private val stationDao: StationDao = mock()
     private val stationKeywordDao: StationKeywordDao = mock()
     private val settingsDao: SettingsDao = mock()
+    private val gson: Gson = mock()
+    private val context: Context = mock()
     private val entityConverters: EntityConverters = mock {
         on { stationEntityToStationConverter }.thenReturn(mock())
         on { stationKeywordEntityToStationKeywordConverter }.thenReturn(mock())
         on { stationToEntityConverter }.thenReturn(mock())
         on { stationKeywordToStationKeywordEntityConverter }.thenReturn(mock())
         on { stringPolishAccentToStringNoAccentConverter }.thenReturn(mock())
+        on { stationDtoToStationConverter }.thenReturn(mock())
+        on { stationKeywordDtoToStationConverter }.thenReturn(mock())
     }
     private lateinit var koleoLocalRepositoryImpl: KoleoLocalRepositoryImpl
 
     @Before
     fun setUp() {
         koleoLocalRepositoryImpl = KoleoLocalRepositoryImpl(
-            stationDao,
-            stationKeywordDao,
-            settingsDao,
-            entityConverters
+            context = context,
+            stationDao = stationDao,
+            stationKeywordDao = stationKeywordDao,
+            settingsDao = settingsDao,
+            entityConverters = entityConverters,
+            gson = gson
         )
     }
 

@@ -2,12 +2,12 @@ package com.calcdistanceapp.presentation.ui.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,15 +28,19 @@ fun SearchScreenComposable(
 ) {
     var expandedSearchBar by rememberSaveable { mutableStateOf<Int?>(null) }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize()) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .align(Alignment.TopCenter)
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.primary)
         ) {
+            Text(
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+                text = "Choose 2 stations to calculate distance between them",
+                style = MaterialTheme.typography.titleMedium.copy(color = MaterialTheme.colorScheme.onPrimary)
+            )
             SearchBarComposable(
                 hintText = "Starting station",
                 searchText = dataState.startingStation?.name ?: "",
@@ -63,8 +67,7 @@ fun SearchScreenComposable(
         if (expandedSearchBar == null && resultText.isNotBlank()) {
             ResultScreenComposable(
                 modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .align(Alignment.Center),
+                    .padding(vertical = 8.dp),
                 resultText = resultText
             )
         }

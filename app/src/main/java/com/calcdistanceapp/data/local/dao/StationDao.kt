@@ -22,6 +22,6 @@ interface StationDao {
     @Query("DELETE FROM $TABLE_STATION")
     suspend fun deleteAllStations()
 
-    @Query("SELECT * FROM $TABLE_STATION WHERE stationId IN (:stationIds) and isGroup = 0 ORDER BY hits DESC LIMIT 10")
+    @Query("SELECT * FROM $TABLE_STATION WHERE stationId IN (:stationIds) and isGroup = 0 ORDER BY hits DESC LIMIT 50")
     fun getStationsByIds(stationIds: List<Int>): Flow<List<StationEntity>>
 }

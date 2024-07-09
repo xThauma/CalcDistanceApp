@@ -32,7 +32,9 @@ class GetStationsUseCase @Inject constructor(
                 if (localStations.isNotEmpty()) {
                     DataResult.Success.FetchLocal
                 } else {
-                    DataResult.Error.NoInternetError
+                    val jsonStations = koleoLocalRepository.getStartingStations()
+                    koleoLocalRepository.insertStations(jsonStations)
+                    DataResult.Success.FetchJson
                 }
             }
         } catch (e: Exception) {

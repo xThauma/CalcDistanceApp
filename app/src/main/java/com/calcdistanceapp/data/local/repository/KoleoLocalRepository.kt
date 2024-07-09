@@ -15,5 +15,7 @@ interface KoleoLocalRepository : KoleoRemoteRepository {
     suspend fun deleteAllStationKeywords()
     suspend fun deleteAllSettings()
     suspend fun getSettings(): SettingsEntity
+    suspend fun getStartingStations(): List<Station>
+    suspend fun getStartingStationKeywords(): List<StationKeyword>
     suspend fun searchStationsByKeyword(keyword: String): Flow<List<Station>>
 }
